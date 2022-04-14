@@ -7,8 +7,8 @@ int limit = (int)request.getAttribute("limit");
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<title>구구단<%=dan%></title>
+	<meta charset="UTF-8" />
+	<title>구구단<%=dan%></title>
 </head>
 <body>
 	<h1>구구단 <%= dan %>단</h1>

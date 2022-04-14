@@ -19,7 +19,7 @@ if(request.getParameter("limit") != null) {
 <html lang="ko">
 <head>
 	<meta charset="UTF-8" />
-	<title>구구단 <%= dan %></title>
+	<title>구구단 <%=dan%></title>
 </head>
 <body>
 	<h1>구구단 <%= dan %>단</h1>
