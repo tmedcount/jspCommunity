@@ -32,7 +32,7 @@ public class ArticleListServlet extends HttpServlet {
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 		
 		ArticleService articleService = Container.articleService;
-		List<Article> articles = articleService.getForPrintArticleByBoardId(boardId);
+		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId);
 		
 		MysqlUtil.closeConnection();
 

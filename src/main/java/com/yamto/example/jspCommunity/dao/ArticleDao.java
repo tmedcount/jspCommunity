@@ -10,7 +10,7 @@ import com.yamto.example.mysqlutil.SecSql;
 
 public class ArticleDao {
 
-	public List<Article> getForPrintArticleByBoardId(int boardId) {
+	public List<Article> getForPrintArticlesByBoardId(int boardId) {
 		List<Article> articles = new ArrayList<>();		
 		
 		SecSql sql = new SecSql();
