@@ -74,7 +74,7 @@ CREATE TABLE article  (
     boardId INT(10) UNSIGNED NOT NULL,
     title CHAR(100) NOT NULL,
     `body` LONGTEXT NOT NULL,
-    hisCount INT(10) UNSIGNED NOT NULL DEFAULT 0
+    hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 # 게시물1 생성
