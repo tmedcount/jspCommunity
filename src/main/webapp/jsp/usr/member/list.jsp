@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
+<%@ page import="com.yamto.example.jspCommunity.dto.Member"%>
 <%
-List<Map<String, Object>> memberMapList = (List<Map<String, Object>>)request.getAttribute("memberMapList");
+List<Member> members = (List<Member>)request.getAttribute("members");
 %>
 <!doctype html>
 <html lang="ko">
@@ -13,13 +14,13 @@ List<Map<String, Object>> memberMapList = (List<Map<String, Object>>)request.get
 </head>
 <body>
 	<h1>회원 리스트</h1>
-	<% for(Map<String, Object> memberMap : memberMapList) { %>
+	<% for(Member member : members) { %>
 			<div>
-				번호 : <%=memberMap.get("id")%>
+				번호 : <%=member.id%>
 				<br />
-				이름 : <%=memberMap.get("name")%>
+				이름 : <%=member.name%>
 				<br />
-				닉네임 : <%=memberMap.get("nickname")%>
+				닉네임 : <%=member.nickname%>
 				<hr />
 			</div>
 	<% } %>
