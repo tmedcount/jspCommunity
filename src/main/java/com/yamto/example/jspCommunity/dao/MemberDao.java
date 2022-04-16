@@ -18,8 +18,7 @@ public class MemberDao {
 		sql.append("FROM `member` AS M");
 		sql.append("ORDER BY M.id DESC");
 						
-		List<Map<String, Object>> MemberMapList = MysqlUtil.selectRows(sql);
-		
+		List<Map<String, Object>> MemberMapList = MysqlUtil.selectRows(sql);		
 		
 		for(Map<String, Object> memberMap : MemberMapList) {
 			members.add(new Member(memberMap));
