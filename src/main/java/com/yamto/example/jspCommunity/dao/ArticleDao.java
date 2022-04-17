@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yamto.example.jspCommunity.dto.Article;
+import com.yamto.example.jspCommunity.dto.Board;
 import com.yamto.example.mysqlutil.MysqlUtil;
 import com.yamto.example.mysqlutil.SecSql;
 
@@ -52,13 +53,28 @@ public class ArticleDao {
 		sql.append("ON A.boardId = B.id");
 		sql.append("WHERE A.id = ?", id);
 						
-		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
 		
-		if(articleMap.isEmpty()) {
+		if(map.isEmpty()) {
 			return null;
 		}
 		
-		return new Article(articleMap);
+		return new Article(map);
+	}
+
+	public Board getBoardById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT B.*");
+		sql.append("FROM board AS B");
+		sql.append("WHERE B.id = ?", id);
+		
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+		
+		if(map.isEmpty()) {
+			return null;
+		}
+
+		return new Board(map);
 	}
 
 }
