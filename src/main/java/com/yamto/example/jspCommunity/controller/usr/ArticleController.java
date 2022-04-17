@@ -48,6 +48,12 @@ public class ArticleController {
 	}
 
 	public String showWrite(HttpServletRequest req, HttpServletResponse resp) {
+		int boardId = Integer.parseInt(req.getParameter("boardId"));
+		
+		Board board = articleService.getBoardById(boardId);
+		
+		req.setAttribute("board", board);
+		
 		return "usr/article/write";
 	}
 }
