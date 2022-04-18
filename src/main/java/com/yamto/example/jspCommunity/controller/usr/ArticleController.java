@@ -34,7 +34,7 @@ public class ArticleController {
 	public String showDetail(HttpServletRequest req, HttpServletResponse resp) {
 		int id = Integer.parseInt(req.getParameter("id"));
 		
-		Article article = articleService.getForPrintArticlesById(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if(article == null) {
 			req.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다.");

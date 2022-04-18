@@ -40,7 +40,7 @@ public class ArticleDao {
 		return articles;
 	}
 
-	public Article getForPrintArticlesById(int id) {
+	public Article getForPrintArticleById(int id) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra__writer");

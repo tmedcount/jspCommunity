@@ -30,7 +30,7 @@ Board board = (Board)request.getAttribute("board");
 				<div>
 					<div>작성</div>
 					<div>
-						<input type="submit" value="작성" />
+						<input type="submit" value="등록" />
 						<button type="button" onclick="history.back();">뒤로가기</button>
 					</div>
 				</div>
