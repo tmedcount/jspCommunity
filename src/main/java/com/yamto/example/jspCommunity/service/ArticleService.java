@@ -35,4 +35,8 @@ public class ArticleService {
 		return articleDao.delete(id);
 	}
 
+	public int modify(Map<String, Object> args) {
+		return articleDao.modify(args);
+	}
+
 }
