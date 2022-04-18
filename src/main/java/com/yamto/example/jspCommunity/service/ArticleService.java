@@ -31,4 +31,8 @@ public class ArticleService {
 		return articleDao.write(args);
 	}
 
+	public int delete(int id) {
+		return articleDao.delete(id);
+	}
+
 }
