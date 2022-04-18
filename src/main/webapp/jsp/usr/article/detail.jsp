@@ -23,7 +23,12 @@ Article article = (Article)request.getAttribute("article");
 			작성자 : <%=article.extra__writer%>
 			<br />
 			제목 : <%=article.title%>
-			<hr />
+		</div>
+		
+		<hr />
+		
+		<div>
+			<a href="list?boardId=<%=article.boardId%>">목록</a>
 		</div>
 </body>
 </html>

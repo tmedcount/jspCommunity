@@ -1,6 +1,7 @@
 package com.yamto.example.jspCommunity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dao.ArticleDao;
@@ -24,6 +25,10 @@ public class ArticleService {
 
 	public Board getBoardById(int id) {
 		return articleDao.getBoardById(id);
+	}
+
+	public int write(Map<String, Object> args) {
+		return articleDao.write(args);
 	}
 
 }
