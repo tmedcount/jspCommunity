@@ -16,11 +16,11 @@ List<Member> members = (List<Member>)request.getAttribute("members");
 	<h1>회원 리스트</h1>
 	<% for(Member member : members) { %>
 			<div>
-				번호 : <%=member.id%>
+				번호 : <%=member.getId()%>
 				<br />
-				이름 : <%=member.name%>
+				이름 : <%=member.getName()%>
 				<br />
-				닉네임 : <%=member.nickname%>
+				닉네임 : <%=member.getNickName()%>
 				<hr />
 			</div>
 	<% } %>

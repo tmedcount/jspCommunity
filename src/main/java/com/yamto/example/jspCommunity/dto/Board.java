@@ -2,6 +2,9 @@ package com.yamto.example.jspCommunity.dto;
 
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class Board {
 	private int id;
 	private String regDate;
@@ -15,73 +18,5 @@ public class Board {
 		this.updateDate = (String)map.get("updateDate");
 		this.code = (String)map.get("code");
 		this.name = (String)map.get("name");
-	}
-	
-	
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-
-	public String getRegDate() {
-		return regDate;
-	}
-
-
-
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
-
-
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
-
-
-
-	public String getCode() {
-		return code;
-	}
-
-
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Board [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", code=" + code + ", name="
-				+ name + "]";
 	}
 }
