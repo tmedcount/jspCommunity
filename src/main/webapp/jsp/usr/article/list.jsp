@@ -7,28 +7,28 @@
 <%
 Board board = (Board)request.getAttribute("board");
 List<Article> articles = (List<Article>)request.getAttribute("articles");
-String pageTitle = board.name + " 게시물 리스트";
+String pageTitle = board.getName() + " 게시물 리스트";
 %>
 <%@ include file="../../part/head.jspf" %>
 	<h1><%=pageTitle%></h1>
 	
 	<div>
-		<a href="write?boardId=<%=request.getParameter("boardId")%>">게시물 작성</a>
+		<a href="write?boardId=${param.boardId}">게시물 작성</a>
 	</div>
 
 	<br />
 	
 	<% for(Article article : articles) { %>
 			<div>
-				번호 : <%=article.id%>
+				번호 : <%=article.getId()%>
 				<br />
-				작성날짜 : <%=article.regDate%>
+				작성날짜 : <%=article.getRegDate()%>
 				<br />
-				갱신날짜 : <%=article.updateDate%>
+				갱신날짜 : <%=article.getUpdateDate()%>
 				<br />
-				작성자 : <%=article.extra__writer%>
+				작성자 : <%=article.getExtra__writer()%>
 				<br />
-				제목 : <a href="detail?id=<%=article.id%>"><%=article.title%></a>
+				제목 : <a href="detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 				<hr />
 			</div>
 	<% } %>
