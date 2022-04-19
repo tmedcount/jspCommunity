@@ -4,3 +4,4 @@
 target/
 build/
 src/main/webapp/META-INF/*
+.factorypath
