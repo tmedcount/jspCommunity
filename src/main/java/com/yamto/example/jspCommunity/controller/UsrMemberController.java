@@ -1,4 +1,4 @@
-package com.yamto.example.jspCommunity.controller.adm;
+package com.yamto.example.jspCommunity.controller;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dto.Member;
 import com.yamto.example.jspCommunity.service.MemberService;
 
-public class MemberController {
+public class UsrMemberController {
 	private MemberService memberService;
 
-	public MemberController() {
+	public UsrMemberController() {
 		memberService = Container.memberService;
 	}
 
@@ -21,7 +21,7 @@ public class MemberController {
 		
 		req.setAttribute("members", members);
 		
-		return "adm/member/list";
+		return "usr/member/list";
 	}
 	
 	

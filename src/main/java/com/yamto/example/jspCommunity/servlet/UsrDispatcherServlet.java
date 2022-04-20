@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yamto.example.jspCommunity.container.Container;
-import com.yamto.example.jspCommunity.controller.usr.ArticleController;
-import com.yamto.example.jspCommunity.controller.usr.MemberController;
+import com.yamto.example.jspCommunity.controller.UsrArticleController;
+import com.yamto.example.jspCommunity.controller.UsrMemberController;
 import com.yamto.example.mysqlutil.MysqlUtil;
 
 // usr/article/list
@@ -40,13 +40,13 @@ public class UsrDispatcherServlet extends HttpServlet {
 		String jspPath = null;
 		
 		if(controllerName.equals("member")) {
-			MemberController memberController = Container.memberController;
+			UsrMemberController memberController = Container.memberController;
 			
 			if(actionMethodName.equals("list")) {
 				jspPath = memberController.showList(req, resp);
 			}
 		} else if(controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
+			UsrArticleController articleController = Container.articleController;
 			
 			if(actionMethodName.equals("list")) {
 				jspPath = articleController.showList(req, resp);

@@ -1,4 +1,4 @@
-package com.yamto.example.jspCommunity.controller.usr;
+package com.yamto.example.jspCommunity.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +12,10 @@ import com.yamto.example.jspCommunity.dto.Article;
 import com.yamto.example.jspCommunity.dto.Board;
 import com.yamto.example.jspCommunity.service.ArticleService;
 
-public class ArticleController {
+public class UsrArticleController {
 	private ArticleService articleService;
 
-	public ArticleController() {
+	public UsrArticleController() {
 		articleService = Container.articleService; 
 	}
 
