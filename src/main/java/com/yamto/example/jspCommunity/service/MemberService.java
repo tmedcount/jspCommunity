@@ -1,6 +1,7 @@
 package com.yamto.example.jspCommunity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dao.MemberDao;
@@ -15,6 +16,10 @@ public class MemberService {
 
 	public List<Member> getForPrintMembers() {
 		return memberDao.getForPrintMembers();
+	}
+
+	public int join(Map<String, Object> args) {
+		return memberDao.join(args);
 	}
 
 }
