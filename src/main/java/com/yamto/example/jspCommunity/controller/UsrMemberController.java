@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yamto.example.jspCommunity.container.Container;
-import com.yamto.example.jspCommunity.dto.Board;
 import com.yamto.example.jspCommunity.dto.Member;
 import com.yamto.example.jspCommunity.service.MemberService;
 
@@ -85,6 +85,9 @@ public class UsrMemberController {
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedMemberId", member.getId());
 
 		req.setAttribute("alertMsg", String.format("%s님 환영합니다!", member.getNickname()));
 		req.setAttribute("replaceUrl", "../home/main");
