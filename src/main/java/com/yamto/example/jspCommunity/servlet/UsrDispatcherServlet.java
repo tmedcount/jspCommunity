@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.controller.UsrArticleController;
+import com.yamto.example.jspCommunity.controller.UsrHomeController;
 import com.yamto.example.jspCommunity.controller.UsrMemberController;
 
 
@@ -14,13 +15,17 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 	@Override
 	protected String doAction(HttpServletRequest req, HttpServletResponse resp, String controllerName, String actionMethodName) {
 		String jspPath = null;
-
-		if (controllerName.equals("member")) {
+		
+		if (controllerName.equals("home")) {
+			UsrHomeController homeConrollet = Container.homeController;
+			
+			if (actionMethodName.equals("main")) {
+				jspPath = homeConrollet.showMain(req, resp);
+			}
+		} else if (controllerName.equals("member")) {
 			UsrMemberController memberController = Container.memberController;
 
-			if (actionMethodName.equals("list")) {
-				jspPath = memberController.showList(req, resp);
-			} else if (actionMethodName.equals("join")) {
+			if (actionMethodName.equals("join")) {
 				jspPath = memberController.showJoin(req, resp);
 			} else if (actionMethodName.equals("doJoin")) {
 				jspPath = memberController.doJoin(req, resp);
@@ -28,6 +33,8 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 				jspPath = memberController.showLogin(req, resp);
 			} else if (actionMethodName.equals("doLogin")) {
 				jspPath = memberController.doLogin(req, resp);
+			} else if (actionMethodName.equals("doLogout")) {
+				jspPath = memberController.doLogout(req, resp);
 			}
 		} else if (controllerName.equals("article")) {
 			UsrArticleController articleController = Container.articleController;
