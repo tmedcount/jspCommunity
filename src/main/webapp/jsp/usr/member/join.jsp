@@ -104,6 +104,11 @@
 				</div>
 				<hr />
 				<div>
+				<div>
+					<div>전화번호</div>
+					<div><input type="number" name="cellphoneNo" maxlength="100" placeholder="전화번호를 입력해 주세요."/></div>
+				</div>
+				<hr />
 					<div>가입</div>
 					<div>
 						<input type="submit" value="가입" />
