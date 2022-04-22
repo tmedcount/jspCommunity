@@ -7,7 +7,7 @@
 		<div>
 			<form action="doWrite" method="post">
 				<input type="hidden" name="boardId" value="${board.id}" />
-				<input type="hidden" name="memberId" value="1" />
+
 				<hr />
 				<div>
 					<div>제목</div>
