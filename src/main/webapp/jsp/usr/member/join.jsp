@@ -7,6 +7,31 @@
 		<div>
 			<script>
 				let doJoinForm__submited = false;
+				let doJoinForm__checkedLoginId = "";
+				
+				// 로그인 아이디 중복 체크
+				function doJoinForm__checkLoginIdDup(el) {
+					const form = $(el).closest('form').get(0);
+					const loginId = form.loginId.value;
+					
+					$.get(
+						"getLoginIdDup",
+						{
+							loginId
+						},
+						function(data) {
+							if(data == "YES") {
+								alert("해당 로그인 아이디는 사용 가능합니다.");
+								doJoinForm__checkedLoginId = loginId;
+							} else if(data == "NO") {
+								alert("해당 로그인 아이디는 이미 사용 중입니다.");
+							}
+						},
+						'html'
+					);
+				}
+				
+				// 폼 발송 전 체크
 				function doJoinForm__submit(form) {
 					if(doJoinForm__submited) {
 						alert("처리 중 입니다.");
@@ -18,6 +43,12 @@
 					if(form.loginId.value.length == 0) {
 						alert("아이디를 입력해 주세요.");
 						form.loginId.focus();
+						return;
+					}
+					
+					if(form.loginId.value != doJoinForm__checkedLoginId) {
+						alert("아이디 중복 체크를 해주세요.");
+						form.btnLoginIdDupCheck.focus();
 						return;
 					}
 					
@@ -75,7 +106,10 @@
 				<hr />
 				<div>
 					<div>로그인 아이디</div>
-					<div><input type="text" name="loginId" maxlength="50" placeholder="아이디를 입력해 주세요."/></div>
+					<div>
+						<input name="loginId" type="text" maxlength="50" placeholder="로그인 아이디를 입력해주세요." />
+						<button onclick="doJoinForm__checkLoginIdDup(this);" name="btnLoginIdDupCheck" type="button">중복체크</button>
+					</div>
 				</div>
 				<hr />
 				<div>
