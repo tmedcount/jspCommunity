@@ -14,20 +14,26 @@
 					const form = $(el).closest('form').get(0);
 					const loginId = form.loginId.value;
 					
+					if(loginId.length == 0) {
+						alert("아이디를 입력해 주세요.");
+						return;
+					}
+					
 					$.get(
 						"getLoginIdDup",
 						{
 							loginId
 						},
 						function(data) {
-							if(data == "YES") {
-								alert("해당 로그인 아이디는 사용 가능합니다.");
-								doJoinForm__checkedLoginId = loginId;
-							} else if(data == "NO") {
-								alert("해당 로그인 아이디는 이미 사용 중입니다.");
+							if(data.msg) {
+								alert(data.msg);
+							}
+							
+							if(data.resultCode.substr(0, 2) == "S-") {
+								doJoinForm__checkedLoginId = data.loginId;
 							}
 						},
-						'html'
+						'json'
 					);
 				}
 				

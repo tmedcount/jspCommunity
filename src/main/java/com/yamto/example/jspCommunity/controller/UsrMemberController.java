@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dto.Member;
 import com.yamto.example.jspCommunity.service.MemberService;
+import com.yamto.example.util.Util;
 
 public class UsrMemberController {
 	private MemberService memberService;
@@ -140,15 +141,24 @@ public class UsrMemberController {
 		
 		Member member = memberService.getMemberByLoginId(loginId);
 		
-		String data = "";
+		Map<String, Object> rs = new HashMap<>();
+		
+		String resultCode = null;
+		String msg = null;
 		
 		if(member != null) {
-			data = "NO";
+			resultCode = "F-1";
+			msg = "이미 사용 중인 아이디입니다.";
 		} else {
-			data = "YES";
+			resultCode = "S-1";
+			msg = "사용 가능한 아이디입니다.";
 		}
 		
-		req.setAttribute("data", data);
+		rs.put("resultCode", resultCode);
+		rs.put("msg", msg);
+		rs.put("loginId", loginId);
+				
+		req.setAttribute("data", Util.getJsonText(rs));
 		
 		return "common/pure";
 	}
