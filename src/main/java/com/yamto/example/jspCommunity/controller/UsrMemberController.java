@@ -1,7 +1,6 @@
 package com.yamto.example.jspCommunity.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,14 +85,13 @@ public class UsrMemberController {
 	}
 	
 	public String doLogout(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-		
-		if(session.getAttribute("loginedMemberId") == null) {
+		if((boolean)req.getAttribute("isLogined") == false) {
 			req.setAttribute("alertMsg", "이미 로그아웃 상태입니다.");
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
 		
+		HttpSession session = req.getSession();
 		session.removeAttribute("loginedMemberId");
 		
 		req.setAttribute("alertMsg", "로그아웃 되었습니다.");

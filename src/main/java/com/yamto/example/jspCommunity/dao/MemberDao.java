@@ -42,11 +42,11 @@ public class MemberDao {
 		return MysqlUtil.insert(sql);
 	}
 
-	public Member getMemberByLoginId(String id) {
+	public Member getMemberByLoginId(String loginId) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT M.*");
 		sql.append("FROM `member` AS M");
-		sql.append("WHERE loginId = ?", id);
+		sql.append("WHERE loginId = ?", loginId);
 		
 		Map<String, Object> map = MysqlUtil.selectRow(sql);
 		
@@ -55,5 +55,20 @@ public class MemberDao {
 		}
 		
 		return new Member(map);		
+	}
+
+	public Member getMemberById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT M.*");
+		sql.append("FROM `member` AS M");
+		sql.append("WHERE id = ?", id);
+		
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+		
+		if(map.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(map);	
 	}
 }
