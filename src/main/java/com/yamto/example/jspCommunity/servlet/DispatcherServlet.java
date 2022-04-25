@@ -92,7 +92,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionUrls.add("/usr/article/modify");
 		needToLoginActionUrls.add("/usr/article/doModify");
 		needToLoginActionUrls.add("/usr/article/doDelete");
-		
+				
 		if(needToLoginActionUrls.contains(actionUrls)) {
 			if((boolean)req.getAttribute("isLogined") == false) {
 				req.setAttribute("alertMsg", "로그인 후 이용해 주세요.");
@@ -103,6 +103,25 @@ public abstract class DispatcherServlet extends HttpServlet {
 			}
 		}
 		// 로그인 필요 필터링 인터셉터 끝
+		
+		// 로그인 불필요 필터링 인터셉터 시작
+		List<String> needToNotLoginActionUrls = new ArrayList<>();
+		
+		needToNotLoginActionUrls.add("/usr/member/login");
+		needToNotLoginActionUrls.add("/usr/member/doLogin");
+		needToNotLoginActionUrls.add("/usr/member/join");
+		needToNotLoginActionUrls.add("/usr/member/doJoin");		
+		
+		if(needToNotLoginActionUrls.contains(actionUrls)) {
+			if((boolean)req.getAttribute("isLogined")) {
+				req.setAttribute("alertMsg", "로그아웃 후 이용해 주세요.");
+				req.setAttribute("replaceUrl", "../home/main");
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/jsp/common/redirect.jsp");
+				rd.forward(req, resp);
+			}
+		}
+		// 로그인 불필요 필터링 인터셉터 끝
 		
 		Map<String, Object> rs = new HashMap<>();
 		rs.put("controllerName", controllerName);
