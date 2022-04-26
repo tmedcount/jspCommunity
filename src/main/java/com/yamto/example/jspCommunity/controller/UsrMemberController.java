@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dto.Member;
+import com.yamto.example.jspCommunity.dto.ResultData;
 import com.yamto.example.jspCommunity.service.MemberService;
-import com.yamto.example.util.Util;
 
 public class UsrMemberController {
 	private MemberService memberService;
@@ -133,8 +133,6 @@ public class UsrMemberController {
 		
 		Member member = memberService.getMemberByLoginId(loginId);
 		
-		Map<String, Object> rs = new HashMap<>();
-		
 		String resultCode = null;
 		String msg = null;
 		
@@ -146,13 +144,9 @@ public class UsrMemberController {
 			msg = "사용 가능한 아이디입니다.";
 		}
 		
-		rs.put("resultCode", resultCode);
-		rs.put("msg", msg);
-		rs.put("loginId", loginId);
-				
-		req.setAttribute("data", Util.getJsonText(rs));
+		req.setAttribute("data", new ResultData(resultCode, msg, "loginId", loginId));
 		
-		return "common/pure";
+		return "common/json";
 	}
 
 	public String showFindLoginId(HttpServletRequest req, HttpServletResponse resp) {
@@ -231,18 +225,15 @@ public class UsrMemberController {
 			return "common/redirect";
 		}
 		
-		Map<String, Object> sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
+		ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
 		
-		String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
-		String resultMsg = (String) sendTempLoginPwToEmailRs.get("msg");
-		
-		if(resultCode.startsWith("F-")) {
-			req.setAttribute("alertMsg", resultMsg);
+		if(sendTempLoginPwToEmailRs.isFail()) {
+			req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 			req.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
 
-		req.setAttribute("alertMsg", resultMsg);
+		req.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 		req.setAttribute("replaceUrl", "../member/login");
 		
 		return "common/redirect";
