@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.coyote.http2.Http2AsyncUpgradeHandler;
+
 import com.yamto.example.jspCommunity.App;
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dao.MemberDao;
@@ -39,7 +41,7 @@ public class MemberService {
 		return memberDao.getMemberByNameAndEmail(name, email);
 	}
 
-	public void sendTempLoginPwToEmail(Member actor) {
+	public Map<String, Object> sendTempLoginPwToEmail(Member actor) {
 		// 메일 제목과 내용 만들기
 		String siteName = App.getSite();
 		String siteLoginUrl = App.getLoginUrl();
@@ -48,11 +50,23 @@ public class MemberService {
 		String body = "<h1>임시 패스워드 : " + tempPassword + "</h1>";
 		body += "<a href=\"" + siteLoginUrl + "\" target=\"_blank\">로그인 하러가기</a>";
 		
+		Map<String, Object> rs = new HashMap<>();
+				
 		// 메일 발송
-		emailService.send(actor.getEmail(), title, body);
+		int sendRs = emailService.send(actor.getEmail(), title, body);
 		
-		// 회원의 비빌먼호를 임시 비밀번호로 변경
-		setTempPassword(actor, tempPassword);
+		if(sendRs == 1) {
+			rs.put("resultCode", "S-1");
+			rs.put("msg", String.format("회원님의 임시 비밀번호가 %s(으)로 발송되었습니다.", actor.getEmail()));
+			
+			// 회원의 비빌먼호를 임시 비밀번호로 변경
+			setTempPassword(actor, tempPassword);
+		} else {
+			rs.put("resultCode", "F-1");
+			rs.put("msg", "메일 발송에 실패하였습니다.");
+		}
+		
+		return rs;
 	}
 
 	private void setTempPassword(Member actor, String tempPassword) {
