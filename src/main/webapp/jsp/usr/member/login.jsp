@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="pageTitle" value="로그인"></c:set>
 <%@ include file="../../part/head.jspf" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 	<h1>${pageTitle}</h1>
 		<div>
 			<script>
@@ -28,12 +29,16 @@
 						form.loginPw.focus();
 						return;
 					}
+					
+					form.loginPwReal.value = sha256(form.loginPw.value);
+					form.loginPw.value = "";
 
 					form.submit();
 					doLoginForm__submited = true;
 				}
 			</script>
 			<form action="doLogin" method="post" onsubmit="doLoginForm__submit(this); return false;">
+				<input type="hidden" name="loginPwReal" />
 				<hr />
 				<div>
 					<div>로그인 아이디</div>

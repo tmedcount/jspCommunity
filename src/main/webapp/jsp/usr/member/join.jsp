@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="pageTitle" value="회원가입"></c:set>
 <%@ include file="../../part/head.jspf" %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 	<h1>${pageTitle}</h1>
 		<div>
 			<script>
@@ -104,11 +105,16 @@
 						return;
 					}
 					
+					form.loginPwReal.value = sha256(form.loginPw.value);
+					form.loginPw.value = "";
+					form.loginPwConfirm.value = "";
+					
 					form.submit();
 					doJoinForm__submited = true;
 				}
 			</script>
 			<form action="doJoin" method="post" onsubmit="doJoinForm__submit(this); return false;">
+				<input type="hidden" name="loginPwReal" />
 				<hr />
 				<div>
 					<div>로그인 아이디</div>
@@ -146,7 +152,7 @@
 				<div>
 				<div>
 					<div>전화번호</div>
-					<div><input type="number" name="cellphoneNo" maxlength="100" placeholder="전화번호를 입력해 주세요."/></div>
+					<div><input type="tel" name="cellphoneNo" maxlength="100" placeholder="전화번호를 입력해 주세요."/></div>
 				</div>
 				<hr />
 					<div>가입</div>
