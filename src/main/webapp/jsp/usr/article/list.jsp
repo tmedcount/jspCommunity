@@ -11,6 +11,12 @@
 
 	<br />
 	
+	<div>
+		총 게시물 수 : ${totalCount}
+	</div>
+	
+	<br />
+	
 	<c:forEach var="article" items="${articles}">
 			<div>
 				번호 : ${article.id}
