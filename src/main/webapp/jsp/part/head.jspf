@@ -17,7 +17,7 @@
 	<header class="top-bar con-min-width">
 		<div class="con">
 			<c:if test="${isLogined}">
-				<div>로그인 된 회원의 번호 : ${loginedMember.nickname}</div>
+				<div>로그인 된 회원의 닉네임 : ${loginedMember.nickname}</div>
 			</c:if>
 
 			<div>

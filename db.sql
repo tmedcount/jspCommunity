@@ -129,4 +129,4 @@ ALTER TABLE `member` CHANGE `adminLevel` `authLevel` TINYINT(1) UNSIGNED DEFAULT
 ALTER TABLE `member` CHANGE `loginId` `loginId` CHAR(50) NOT NULL AFTER `updateDate`, CHANGE `loginPw` `loginPw` VARCHAR(200) NOT NULL AFTER `loginId`, ADD COLUMN `cellphoneNo` CHAR(20) NOT NULL AFTER `email`;
 
 # 회원가입과 로그인, 브라우저단에서 비밀번호 해시
-UPDATE `member` SET loginPw = SHA2(loginPw, 256) WHERE id < 2;
+UPDATE `member` SET loginPw = SHA2(loginPw, 256) WHERE id <= 2;
