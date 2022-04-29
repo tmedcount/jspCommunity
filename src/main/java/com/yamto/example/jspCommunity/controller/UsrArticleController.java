@@ -6,12 +6,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.yamto.example.jspCommunity.container.Container;
 import com.yamto.example.jspCommunity.dto.Article;
 import com.yamto.example.jspCommunity.dto.Board;
 import com.yamto.example.jspCommunity.service.ArticleService;
+import com.yamto.example.util.Util;
 
 public class UsrArticleController {
 	private ArticleService articleService;
@@ -24,6 +24,10 @@ public class UsrArticleController {
 		String searchKeyWord = req.getParameter("searchKeyWord");
 		String searchKeyWordType = req.getParameter("searchKeyWordType");
 		
+		int page = Util.getAsInt(req.getParameter("page"), 1);
+		int itemsInAPage = 30;
+		int limitStart = (page -1 ) * itemsInAPage; 
+		
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
 		
 		Board board = articleService.getBoardById(boardId);
@@ -31,7 +35,8 @@ public class UsrArticleController {
 		req.setAttribute("board", board);
 		
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeyWord, searchKeyWordType);
-		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, searchKeyWord, searchKeyWordType);
+		
+		List<Article> articles = articleService.getForPrintArticlesByBoardId(boardId, limitStart, itemsInAPage, searchKeyWord, searchKeyWordType);
 		
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("articles", articles);

@@ -11,7 +11,7 @@ import com.yamto.example.mysqlutil.SecSql;
 
 public class ArticleDao {
 
-	public List<Article> getForPrintArticlesByBoardId(int boardId, String searchKeyWord, String searchKeyWordType) {
+	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeyWord, String searchKeyWordType) {
 		List<Article> articles = new ArrayList<>();		
 		
 		SecSql sql = new SecSql();
@@ -39,11 +39,13 @@ public class ArticleDao {
 		}
 		
 		sql.append("ORDER BY A.id DESC");
+		
+		if(limitCount != -1) {
+			sql.append("LIMIT ?, ?", limitStart, limitCount);
+		}
 						
 		List<Map<String, Object>> articleMapList = MysqlUtil.selectRows(sql);
-		
-		// System.out.println(sql.getRawSql());
-		
+				
 		for(Map<String, Object> articleMap : articleMapList) {
 			articles.add(new Article(articleMap));
 		}
