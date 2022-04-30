@@ -11,7 +11,7 @@ import com.yamto.example.mysqlutil.SecSql;
 
 public class ArticleDao {
 
-	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeyWord, String searchKeyWordType) {
+	public List<Article> getForPrintArticlesByBoardId(int boardId, int limitStart, int limitCount, String searchKeyword, String searchKeywordType) {
 		List<Article> articles = new ArrayList<>();		
 		
 		SecSql sql = new SecSql();
@@ -28,13 +28,13 @@ public class ArticleDao {
 			sql.append("WHERE A.boardId = ?", boardId);
 		}
 		
-		if(searchKeyWord != null) {
-			if(searchKeyWordType == null || searchKeyWordType.equals("title")) {
-				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyWord);
-			} else if(searchKeyWordType.equals("body")) {
-				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyWord);
-			} else if(searchKeyWordType.equals("titleAndBody")) {
-				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyWord, searchKeyWord);
+		if(searchKeyword != null) {
+			if(searchKeywordType == null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if(searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if(searchKeywordType.equals("titleAndBody")) {
+				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyword, searchKeyword);
 			}
 		}
 		
