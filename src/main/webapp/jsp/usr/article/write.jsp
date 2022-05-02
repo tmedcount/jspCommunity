@@ -4,41 +4,41 @@
 <c:set var="pageTitle" value="${board.name} 게시물 작성"></c:set>
 <%@ include file="../../part/head.jspf" %>
 	<h1>${pageTitle}</h1>
-		<script>
-			let doFormWrite__submited = false;
-			
-			// 폼 발송전 체크
-			function doFormWrite__submit(form) {
-				if(doFormWrite__submited) {
-					alert('처리 중입니다.');
-					return;
-				}
-				
-				form.title.value = form.title.value.trim();
-				
-				if(form.title.value.length == 0) {
-					alert('제목을 입력해 주세요.');
-					form.title.focus();
-					return;
-				}
-				
-				const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
-				const body = editor.getMardown().trim();
-				
-				if ( body.length == 0 ) {
-					alert('내용을 입력해주세요.');
-					editor.focus();
-					return;
-				}
-				
-				form.body.value = body;
-				
-				form.submit();
-				DoWriteForm__submited = true;
-			}
-		</script>
 		<div>
-			<form action="doWrite" method="post" onclick="doFormWrite__submit(this); return false;">
+			<script>
+				let doWriteForm__submited = false;
+				
+				// 폼 발송전 체크
+				function doWriteForm__submit(form) {
+					if(doWriteForm__submited) {
+						alert('처리 중입니다.');
+						return;
+					}
+					
+					form.title.value = form.title.value.trim();
+					
+					if(form.title.value.length == 0) {
+						alert('제목을 입력해 주세요.');
+						form.title.focus();
+						return;
+					}
+					
+					const editor = $(form).find('.toast-ui-editor').data('data-toast-editor');
+					const body = editor.getMarkdown().trim();
+					
+					if(body.length == 0 ) {
+						alert('내용을 입력해주세요.');
+						editor.focus();
+						return;
+					}
+					
+					form.body.value = body;
+					
+					form.submit();
+					DoWriteForm__submited = true;
+				}
+			</script>
+			<form action="doWrite" method="post" onsubmit="doWriteForm__submit(this); return false;">
 				<input type="hidden" name="boardId" value="${board.id}" />
 				<input type="hidden" name="body" />
 

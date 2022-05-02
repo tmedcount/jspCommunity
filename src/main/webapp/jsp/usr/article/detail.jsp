@@ -16,7 +16,7 @@
 			제목 : ${article.title}
 			<hr />
 			<script type="text/x-template">${article.body}</script>
- 			 <div class="toast-ui-viewer" id="editor-viewer-2">
+ 			 <div class="toast-ui-viewer" id="editor-viewer-2"></div>
 		</div>
 		
 		<hr />
