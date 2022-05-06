@@ -109,14 +109,14 @@ public abstract class DispatcherServlet extends HttpServlet {
 		// 로그인 필요 필터링 인터셉터 끝
 		
 		// 로그인 불필요 필터링 인터셉터 시작
-		List<String> needToNotLoginActionUrls = new ArrayList<>();
+		List<String> needNotToLoginActionUrls = new ArrayList<>();
 		
-		needToNotLoginActionUrls.add("/usr/member/login");
-		needToNotLoginActionUrls.add("/usr/member/doLogin");
-		needToNotLoginActionUrls.add("/usr/member/join");
-		needToNotLoginActionUrls.add("/usr/member/doJoin");		
+		needNotToLoginActionUrls.add("/usr/member/login");
+		needNotToLoginActionUrls.add("/usr/member/doLogin");
+		needNotToLoginActionUrls.add("/usr/member/join");
+		needNotToLoginActionUrls.add("/usr/member/doJoin");		
 		
-		if(needToNotLoginActionUrls.contains(actionUrls)) {
+		if(needNotToLoginActionUrls.contains(actionUrls)) {
 			if((boolean)req.getAttribute("isLogined")) {
 				req.setAttribute("alertMsg", "로그아웃 후 이용해 주세요.");
 				req.setAttribute("replaceUrl", "../home/main");
